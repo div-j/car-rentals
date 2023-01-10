@@ -148,7 +148,18 @@
                             <option value="100">Yes +60/day</option>
                             <option value="150">Armed +100/day</option>
                         </select>
+
                     </div>
+                    <div class="input-field">
+                      <label>I would like to repay my gas at $20/daily:</label>
+                      <select required id="repay" onchange="calculatePrice()">
+                          <option disabled selected value="0">Select Services</option>
+                          <option value="0">No</option>
+                          <option value="20">Yes</option>
+                         
+                      </select>
+                      
+                  </div>
 
 
               </div>
@@ -279,8 +290,10 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     var f =Number($("#services :selected").val())
     var g =Number($("#class :selected").val())
     var h =Number($("#security :selected").val())
+    var i =Number($("#repay :selected").val())
 
-    var result = a+b+c+d+e+f+g+h
+
+    var result = a+b+c+d+e+f+g+h+i
     $('#total').text(result)
     console.log(result);
   };
