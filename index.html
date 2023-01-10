@@ -5,10 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Car and Housing Services</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
- <link rel="stylesheet" href="../../bootstrap-5.2.2-dist/css/bootstrap.min.css">
- <link rel="stylesheet" href="../../bootstrap-icons-1.10.2/">
+ <!-- <link rel="stylesheet" href="../../bootstrap-5.2.2-dist/css/bootstrap.min.css">
+ <link rel="stylesheet" href="../../bootstrap-icons-1.10.2/"> -->
  <link rel="stylesheet" href="style.css">
 </head>
 
@@ -91,7 +92,7 @@
     <section class="container1 mt-4">
         <header>Rent A Car</header>
 
-        <form action="#">
+        <form action="#" name="form" >
             <div class="form first">
                 <div class="details personal">
 
@@ -110,37 +111,45 @@
                             <label>Mobile Number</label>
                             <input type="number" placeholder="Enter mobile number" required>
                         </div>
-
                         <div class="input-field">
+                          <label>Date of Pickup</label>
+                          <input type="date" placeholder="Enter mobile number" required>
+                      </div>                        <div class="input-field">
+                        <label>Date of Drop-off</label>
+                        <input type="date" placeholder="Enter mobile number" required>
+                    </div>
+                        <div class="input-field" >
                             <label>I need  Car/Driver Services for:</label>
-                            <select required>
-                                <option disabled selected>Select Services</option>
-                                <option>Daily $80/day</option>
-                                <option>Weekly $500/wk</option>
-                                <option>Monthly $1800/month</option>
+                            <select required id="services" onchange="calculatePrice()" >
+                                <option disabled selected value="0">Select Services</option>
+                                <option value="500">Daily $80/day</option>
+                                <option value="1000">Weekly $500/wk</option>
+                                <option value="7000">Monthly $1800/month</option>
                             </select>
                         </div>
                         <div class="input-field">
                           <label>My Class of Car Preference:
 
                           </label>
-                          <select required>
-                              <option disabled selected>Select Services</option>
-                              <option>Economy</option>
-                              <option>MidClass +20/day</option>
-                              <option>Luxury +40/day</option>
+                          <select required id="class" onchange="calculatePrice()">
+                              <option disabled selected value="0">Select Services</option>
+                              <option value="100">Economy</option>
+                              <option value="200">MidClass +20/day</option>
+                              <option value="500">Luxury +40/day</option>
                           </select>
  
                       </div>
                       <div class="input-field">
                         <label>I will like a security officer:</label>
-                        <select required>
-                            <option disabled selected>Select Services</option>
-                            <option>No</option>
-                            <option>Yes +40/day</option>
-                            <option>Armed +100/dayy</option>
+                        <select required id="security" onchange="calculatePrice()">
+                            <option disabled selected value="0">Select Services</option>
+                            <option value="0">No</option>
+                            <option value="50">Yes +40/day</option>
+                            <option value="100">Yes +60/day</option>
+                            <option value="150">Armed +100/day</option>
                         </select>
                     </div>
+
 
               </div>
 
@@ -151,31 +160,32 @@
                         <div class="input-field">
                             <label> Car/Driver Rental Total</label>
 
-                            <input type="number" placeholder="$___________" required>
+                            <input id="rent" type="number" placeholder="$___________" required onchange="calculatePrice()">
                         </div>
 
                         <div class="input-field">
                             <label>Car Class Total </label>
-                            <input type="number" placeholder="$__________" required>
+                            <input id="classNo" type="number" placeholder="$__________" required onchange="calculatePrice()">
                         </div>
 
                         <div class="input-field">
                             <label>Security Officer Total</label>
-                            <input type="number" placeholder="$__________" required>
+                            <input id="securityNo" type="number" placeholder="$__________" required onchange="calculatePrice()">
                         </div>
 
                         <div class="input-field">
                             <label>Prepaid Fuel Total</label>
-                            <input type="number" placeholder="$__________" required>
+                            <input id="fuel" type="text" placeholder="$__________" required  name="fuel" onchange="calculatePrice()">
                         </div>
                         <div class="input-field " >
                           <label>Handling Fees </label>
-                          <input type="number" placeholder="$7.95" value="7.95" disabled>
+                          <input id="handle" type="number" placeholder="$7.95" value="7.95" disabled onchange="calculatePrice()">
                       </div>
+                      
      
                 </div> 
-                <span class="title">TOTAL AMOUNT</span>
-                <button class="btn btn-primary mb-3 mt-4" type="submit">Submit</button>
+                <span class="title">TOTAL AMOUNT $ <span id="total"  ></span></span>
+                <button id="b" class="btn btn-primary mb-3 mt-4" type="submit">Submit</button>
 
             </div>
         </form>
@@ -185,10 +195,9 @@
         <img src="./image/mbenz.png" alt="" width="100%">
     </center>
     </section>
-    
 </main>
 <section>
-  
+ 
 </section>
 <footer class="ftco-footer ftco-bg-dark ftco-section footer mt-5">
     <div class="container">
@@ -254,8 +263,30 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<!-- <script src="../../bootstrap-5.2.2-dist/js/bootstrap.min.js"></script> -->
 
-<script src="../../bootstrap-5.2.2-dist/js/bootstrap.min.js"></script>
+<script>
+
+
+
+  function calculatePrice(){
+
+    var a =Number($("#rent").val())
+    var b =Number( $("#classNo").val())
+    var c =Number($("#securityNo").val())
+    var d =Number($("#fuel").val())
+    var e =Number($("#handle").val())
+    var f =Number($("#services :selected").val())
+    var g =Number($("#class :selected").val())
+    var h =Number($("#security :selected").val())
+
+    var result = a+b+c+d+e+f+g+h
+    $('#total').text(result)
+    console.log(result);
+  };
+
+
+</script>
 </body>
 
 </html>
